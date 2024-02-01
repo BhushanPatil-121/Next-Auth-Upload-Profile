@@ -3,20 +3,23 @@ import EditIcon from "@mui/icons-material/Edit";
 import Link from "next/link";
 import style from "./../page.module.css";
 import prisma from "@/lib/prisma";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 
 export async function users() {
-  const users = await prisma.profile.findMany({});
+  const session =await getServerSession(authOptions);
+  const users = await prisma.profile.findUnique({
+    where:{
+      email:session.user.email
+    }
+  });
   return users;
 }
 export default async function Profile() {
-  let data = await users();
-  let user = data[0];
-  // console.log(user.avatar);
+  let user = await users();
+  
   let im=user.avatar;
-  // console.log(user);
   const imageSrc= im;
-  // console.log(imageSrc);
-
   return (
     <main>
       <div className={style.cardContainer}>
@@ -24,12 +27,9 @@ export default async function Profile() {
           <button className={style.primary}>
           <Link
             href={{
-              pathname: "/profile/edit",
+              pathname: "/edit",
               query: {
-                id: user.id,
-                // city: user.city,
-                // heading: user.heading,
-                // avatar:imageSrc
+                email: user.email,
               },
             }} ><EditIcon fontSize="small" /> </Link>
             </button>
@@ -44,6 +44,7 @@ export default async function Profile() {
         <h3 className={style.h3}>{user.name}</h3>
         <h6 className={style.h6}>{user.city}</h6>
         <p className={style.p}>{user.heading}</p>
+        <p className={style.pe}>Email - {user.email}</p>
       </div>
     </main>
   );

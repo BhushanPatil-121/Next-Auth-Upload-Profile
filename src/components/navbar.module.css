@@ -1,0 +1,17 @@
+.navlinks {
+    margin-left: 10px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+ .logo {
+    flex-grow: 1;
+    cursor: "pointer",
+  }
+  .link {
+    text-decoration: "none";
+    color: "white";
+    font-size: "20px";
+    margin-left: 20px;
+  }

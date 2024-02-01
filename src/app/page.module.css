@@ -1,25 +1,32 @@
 .h3 {
 	margin: 10px 0;
-  font-size: 23px;
+	font-size: 23px;
 }
 
 .h6 {
 	margin: 5px 0;
-  font-size: 15px;
+	font-size: 15px;
 }
 
 .p {
 	font-size: 15px;
 	line-height: 21px;
-  font-weight: bold;
+	font-weight: bold;
 }
 
-
+.pe {
+	position: relative;
+	float: right;
+	font-size: 13px;
+	line-height: 21px;
+	font-weight: bold;
+}
 
 .cardContainer {
 	background-color: #231E39;
 	border-radius: 5px;
-	box-shadow: 0px 10px 20px -10px rgba(0,0,0,0.75);
+	margin: 20px;
+	box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
 	color: #d4d7e0;
 	padding: 50px 30px;
 	position: relative;
@@ -36,10 +43,10 @@
 }
 
 button.primary {
-  position: absolute;
-  right: 0;
-  margin: 10px 30px;
-  cursor: pointer;
+	position: absolute;
+	right: 0;
+	margin: 10px 30px;
+	cursor: pointer;
 	background-color: #03BFCB;
 	border: 1px solid #03BFCB;
 	border-radius: 50%;
@@ -52,7 +59,3 @@ button.primary.ghost {
 	background-color: transparent;
 	color: #02899C;
 }
-
-
-
-

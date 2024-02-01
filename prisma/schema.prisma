@@ -1,18 +1,29 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["fullTextSearch"]
 }
-
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-model profile {
-  id      Int     @id 
-  name    String  
+model User {
+  id       Int      @id @default(autoincrement())
+  name     String
+  email    String   @unique
+  password String
+  created  DateTime @default(now())
+  updated  DateTime @updatedAt
+}
+
+model Profile {
+  id      Int      @id @default(autoincrement())
+  name    String
+  email   String   @unique
   city    String
   heading String
-  avatar  String  
+  avatar  String?
+  created DateTime @default(now())
+  updated DateTime @updatedAt
 }

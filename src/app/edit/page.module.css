@@ -1,7 +1,6 @@
 .cardContainer {
 	background-color: #231E39;
 	border-radius: 5px;
-	margin: 20px;
 	box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
 	color: #B3B8CD;
 	padding: 20px 0px;
@@ -13,7 +12,7 @@
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-
+	margin: 20px;
 }
 
 
@@ -23,6 +22,19 @@
 	padding: 1px;
 }
 
+.primary {
+	position: absolute;
+	z-index: 5;
+	margin: 50px;
+	float:right;
+	cursor: pointer;
+	  border: 1px solid #ff0000;
+	  background-color: #e4d8d8;
+	  border-radius: 50%;
+	  color: #231E39;
+	  font-family: Montserrat, sans-serif;
+	  font-weight: 500;
+  }
 .primary1 {
 	background-color: #37286b;
 	color: white;
@@ -74,7 +86,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	border: 0px 0px1px 0px solid white;
+	border: 0px 0px 1px 0px solid white;
 	font-size: 13px;
 	outline-style: none;
 }
@@ -83,6 +95,5 @@
 	overflow: hidden;
 	width: 90%;
 	/* background-color: red; */
-	margin-bottom: -10px;
 
 }
