@@ -27,7 +27,7 @@ export default async function Profile() {
           <button className={style.primary}>
           <Link
             href={{
-              pathname: "/edit",
+              pathname: "/editprofile",
               query: {
                 email: user.email,
               },

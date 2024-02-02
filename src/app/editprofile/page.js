@@ -9,30 +9,31 @@ import { Button, CircularProgress, Backdrop } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { useRouter } from "next/navigation";
 
-export default function Edit({ searchParams }) {
+export default function EditProfile({ searchParams }) {
   let router = useRouter();
   let emailId = searchParams.email;
+  
   useEffect(() => {
     const fetchData = async () => {
-      let profileData = await fetch("/api/profile/" + emailId, {
-        caches: "no-cache",
-      });
-      profileData = await profileData.json();
-      if (profileData.success) {
-        let data = profileData.profile;
-        setnewId(data.id);
-        setPreview(data.avatar);
-        setNewName(data.name);
-        setemail(data.email);
-        setNewCity(data.city);
-        setNewHeading(data.heading);
-      } else {
-        router.push("/");
+      if(window.location.hostname === 'localhost') {
+        let profileData = await fetch("/api/profile/" + emailId);
+        profileData = await profileData.json();
+        if (profileData.success) {
+          let data = profileData.profile;
+          setnewId(data.id);
+          setPreview(data.avatar);
+          setNewName(data.name);
+          setemail(data.email);
+          setNewCity(data.city);
+          setNewHeading(data.heading);
+        }
+        else{
+           router.push("/")
+         }
       }
     };
     fetchData();
-  }, []);
-
+  }, [emailId , router]);
   const updateData2 = async () => {
     let newData = {
       id: newId,
@@ -42,19 +43,21 @@ export default function Edit({ searchParams }) {
       avatar: newImage,
     };
     handleOpen();
-    let data = await fetch(
-      "/api/profile/"+emailId,
-      {
+    try {
+      const data = await fetch("/api/profile/" + emailId, {
         method: "PUT",
         body: JSON.stringify(newData),
+      });
+      const profile = await data.json();
+      if (profile.success) {
+        alert("Profile Updated Successfully!!");
+        router.push("/profile")
+        handleClose();
+      } else {
+        alert("Error! please try after few minutes.");
+        handleClose();
       }
-    );
-    data = await data.json();
-    if (data.success) {
-      alert("Profile Updated Successfully!!");
-      router.push("/sign-in");
-      handleClose();
-    } else {
+    } catch (error) {
       alert("Error! please try after few minutes.");
       handleClose();
     }
@@ -128,7 +131,7 @@ export default function Edit({ searchParams }) {
         <button className={style.primary} onClick={handleDelete}>
           <DeleteOutline sx={{ color: red[500] }} fontSize="small" />
         </button>
-        <form onSubmit={updateData2} method="post">
+        <form onSubmit={updateData2}>
           <div className={style.cardContainer}>
             {preview ? (
               <Image
